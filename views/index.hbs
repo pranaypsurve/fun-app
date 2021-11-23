@@ -1,0 +1,100 @@
+{{> header }}
+<style>
+    @media only screen and (min-width:768px){
+        form label{
+            font-size: 1vw !important;
+        }
+    }
+</style>
+    <section class="">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center p-2">Know Your Friendship Bond From Your Friends !</h1>
+                    <h2 class="text-center p-2">Create your own and send url to your friends and see their views about you</h2>
+                </div>
+                <div class="col-md-12 text-center">
+                    <a href="/view_all" class="btn btn-secondary mb-3">Views All</a>
+                </div>
+                <div class="col-md-6 mx-auto mb-3">
+                    <form action="/" method="post" id="user_form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Your Name</label>
+                                    <input type="text" class="form-control" name="yourname" id="yourname" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Age</label>
+                                    <input type="number" class="form-control" name="age" id="age">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Login Username</label>    
+                                    <input type="text" class="form-control" name="lusername" id="lusername" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Password</label>
+                                    <input type="password" class="form-control" name="pswd" id="pswd" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Question</label>
+                                    <input type="text" class="form-control" name="age" id="" value="How Is Your Friendship ?" readonly title="Read Only">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Option To Show For Your Friends to Select</label>
+                                    <div class="row">
+                                        <div class="col-md-4 col-lg-3">
+                                            <label for="friend">Friend</label>
+                                             <input type="checkbox" class="float-right" value='1' id="friend" name="friend" checked> 
+                                        </div>
+                                        <div class="col-md-4 col-lg-3">
+                                            <label for="bestfriend">Best Friend</label>
+                                             <input type="checkbox" class="float-right" value='1' id="bestfriend" name="bestfriend"> 
+                                        </div>
+                                        <div class="col-md-4 col-lg-3">
+                                            <label for="closefriend">Close Friend</label>
+                                             <input type="checkbox" class="float-right" value='1' id="closefriend" name="closefriend"> 
+                                        </div>
+                                        <div class="col-md-4 col-lg-3">
+                                            <label for="bachpnkayaar">Bachpan Ka Yaar</label>
+                                             <input type="checkbox" class="float-right" value='1' id="bachpnkayaar" name="bachpnkayaar"> 
+                                        </div>
+                                        <div class="col-md-4 col-lg-3">
+                                            <label for="bachpnkidost">Bachpan Ki Dost</label>
+                                             <input type="checkbox" class="float-right" value='1' id="bachpnkidost" name="bachpnkidost"> 
+                                        </div>
+                                        <div class="col-md-4 col-lg-3">
+                                            <label for="mylove">My Love</label>
+                                             <input type="checkbox" class="float-right" value='1' id="mylove" name="mylove"> 
+                                        </div>
+                                        <div class="col-md-4 col-lg-3">
+                                            <label for="crush"> Crush</label>
+                                            <input type="checkbox" class="float-right" value='1' id="crush" name="crush"> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="submit" class="btn btn-primary" value="Get Link">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></>
+< src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

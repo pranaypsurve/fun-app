@@ -1,0 +1,38 @@
+{{> header }}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <h1 class="text-center pt-3">How Is Your Friendship With {{username}}</h1>
+            </div>
+            <div class="col-md-8 mx-auto">
+                <form action="" method="post">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Your Name</label>
+                                <input type="text" class="form-control" name="visiterName" id="" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Select Below Options</label>
+                                <div class="row">
+                                    {{#each data}}
+                                    <div class="col-md-3">
+                                        <label for="{{optionTitle}}">{{label}}</label>
+                                        <input type="checkbox" class="float-right" value='1' id="{{optionTitle}}" name="{{optionTitle}}"> 
+                                    </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

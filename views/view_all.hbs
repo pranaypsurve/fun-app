@@ -1,0 +1,62 @@
+{{>header}}
+<style>
+    .hide{
+        display: none;
+    }
+    .show{
+        display: block;
+    }
+</style>
+<section class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto {{visible}}">
+                <form action="/view_all" method="post">
+                <div class="row">
+                    <div class="col-md-12 mt-4">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" class="form-control" id="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pswd">Password</label>
+                            <input type="text" name="pswd" class="form-control" id="pswd" required>
+                        </div>
+                        <input type="submit" class="btn btn-success" value="Login" />
+                    </div>
+                </div>
+                </form>
+                {{#if message}}
+                <h4 class="text-center text-danger">{{message}} <i class="fa fa-frown-o" aria-hidden="true"></i></h4>
+                {{/if}}
+            </div>
+            <div class="col-md-12 mt-5 {{table}}">
+                <h3 class="p-3 text-center">List Of Peoples Views For You</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Name</th>
+                                <th>Selected Option</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            {{#if data}}
+                            {{#each data}}
+                            <tr>
+                                <td>{{name}}</td>
+                                <td>{{#each submitedOpt}} | {{label}}{{/each}}</td>
+                            </tr>
+                            {{/each}}
+                            {{else}}
+                            <tr>
+                                <td colspan="2" class="text-center">No Records Found</td>
+                            </tr>
+                            {{/if}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
