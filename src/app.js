@@ -1,13 +1,16 @@
+const { Console } = require('console');
 let express = require('express') , hbs = require('hbs'), path = require('path');
 let app = express();
 let mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
+require('dotenv').config();
 
 
+var dbStatus = '';
 app.use(express.static('public'));
 // Connect To DB
-mongoose.connect('mongodb+srv://pranay97:2016017000773851@cluster0.xwfv9.mongodb.net/funApp?retryWrites=true&w=majority')
-.then(()=>{
+mongoose.connect('mongodb+srv://pranay97:'+process.env.PASS+'@cluster0.xwfv9.mongodb.net/funApp?retryWrites=true&w=majority')
+.then((res)=>{
     console.log('Db Connected');
 })
 .catch((err)=>{
@@ -43,6 +46,7 @@ app.get('/',(req,res)=>{
     // Collection.deleteMany({},()=>{
         
     // });
+    // console.log(req.connection.remoteAddress);
     res.render('index',{title:"Home"});
 });
 app.get('/view_all',(req,res)=>{
@@ -139,6 +143,7 @@ app.post('/',(req,res)=>{
     Collection.findOne({username:req.body.lusername},{username:true},(err,record)=>{
         if(!record){
             let postData = new Collection({
+                ip:req.ip,
                 username:req.body.lusername,
                 password:req.body.pswd,
                 name:req.body.yourname,
@@ -174,11 +179,9 @@ app.post('/',(req,res)=>{
                     flag:req.body.crush  || '0'
                 }]
             });
-            
             postData.save((err,records)=>{
                 // console.log('Data Inserted',err);
                 res.render('linkGenerated',{title:"Generated Link",url:req.get('host')+'/display/'+records['_id']});
-                
             });
         }else{
             res.send("Username Already Exists");
