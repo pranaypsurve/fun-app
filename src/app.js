@@ -1,12 +1,15 @@
-const { Console } = require('console');
 let express = require('express') , hbs = require('hbs'), path = require('path');
 let app = express();
+var address = require('address');
+var os = require('os');
 let mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 
+let currentTime = new Date().toLocaleTimeString();
+console.log(currentTime);
 
-var dbStatus = '';
+
 app.use(express.static('public'));
 // Connect To DB
 mongoose.connect('mongodb+srv://pranay97:'+process.env.PASS+'@cluster0.xwfv9.mongodb.net/funApp?retryWrites=true&w=majority')
@@ -19,7 +22,7 @@ mongoose.connect('mongodb+srv://pranay97:'+process.env.PASS+'@cluster0.xwfv9.mon
 
 // schema
 let userSchema = mongoose.Schema({
-    ip:String,
+    device_dtl:Object,
     username:String,
     password:String,
     name:String,
@@ -76,21 +79,27 @@ app.get('/success',(req,res)=>{
 
 app.get('/display/:id',(req,res)=>{
     let db_id = req.params.id;
-    Collection.findById(db_id,{username:true,options:true},(err,record)=>{
-        if(err){
-            res.render('display',{err});
-        }
-        if(record){
-            let selectedData = record.options.filter((item)=>{
-                return item.flag == 1;
-            })
-            // console.log(selectedData);
-            res.render('display',{data:selectedData,username:record.username,title:"Home"});
-        }else{
-            res.render('index');
-        }
-        
-    });
+    let isValid = mongoose.Types.ObjectId.isValid(db_id);
+    if(isValid){
+        Collection.findById(db_id,{username:true,options:true},(err,record)=>{
+            console.log(db_id.match("/^[0-9a-fA-f]{24}$"));
+            if(err){
+                res.render('display',{err});
+            }
+            if(record){
+                let selectedData = record.options.filter((item)=>{
+                    return item.flag == 1;
+                })
+                // console.log(selectedData);
+                res.render('display',{data:selectedData,username:record.username,title:"Home"});
+            }else{
+                res.render('index');
+            }
+            
+        });
+    }else{
+        res.status(500).send();
+    }
 });
 app.post('/display/:id',(req,res)=>{
     let get_id = req.params.id;
@@ -133,18 +142,28 @@ app.post('/display/:id',(req,res)=>{
     let new_record = [
         {
             name:req.body.visiterName,
-            submitedOpt:filtered_records
+            submitedOpt:filtered_records,
+            created_on: new Date().toLocaleDateString() + ' at ' + currentTime
         }
     ];
     Collection.findByIdAndUpdate(get_id,{$push : { viewsSubmited:new_record}},(err,data)=>{
         res.redirect('/success');
     })
 });
+
+
 app.post('/',(req,res)=>{
+    let dvs_hostname = os.hostname();
+    let dvs_ip =  address.ip();
+    let dvs_mac =  address.mac((err,macid)=>{
+        return macid;
+    });
+    // console.log(dvs_ip,dvs_mac);
     Collection.findOne({username:req.body.lusername},{username:true},(err,record)=>{
         if(!record){
+            
             let postData = new Collection({
-                ip:req.ip,
+                device_dtl:{deviceIP:dvs_ip,deviceMAC:dvs_mac,osHostName:dvs_hostname},
                 username:req.body.lusername,
                 password:req.body.pswd,
                 name:req.body.yourname,
@@ -181,7 +200,7 @@ app.post('/',(req,res)=>{
                 }]
             });
             postData.save((err,records)=>{
-                console.log('Data Inserted',err);
+                console.log('Data Inserted',records);
                 res.render('linkGenerated',{title:"Generated Link",url:req.get('host')+'/display/'+records['_id']});
             });
         }else{

@@ -38,6 +38,7 @@
                             <tr class="text-center">
                                 <th>Name</th>
                                 <th>Selected Option</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
@@ -45,7 +46,8 @@
                             {{#each data}}
                             <tr>
                                 <td>{{name}}</td>
-                                <td>{{#each submitedOpt}} | {{label}}{{/each}}</td>
+                                <td> {{#if submitedOpt}} {{#each submitedOpt}} | {{label}}{{/each}} {{else}} This viewer not selected any options {{/if}}</td>
+                                <td>{{created_on}}</td>
                             </tr>
                             {{/each}}
                             {{else}}
@@ -60,3 +62,4 @@
         </div>
     </div>
 </section>
+{{>footer}}
