@@ -19,6 +19,7 @@ mongoose.connect('mongodb+srv://pranay97:'+process.env.PASS+'@cluster0.xwfv9.mon
 
 // schema
 let userSchema = mongoose.Schema({
+    ip:String,
     username:String,
     password:String,
     name:String,
@@ -180,7 +181,7 @@ app.post('/',(req,res)=>{
                 }]
             });
             postData.save((err,records)=>{
-                // console.log('Data Inserted',err);
+                console.log('Data Inserted',err);
                 res.render('linkGenerated',{title:"Generated Link",url:req.get('host')+'/display/'+records['_id']});
             });
         }else{
