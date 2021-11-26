@@ -6,8 +6,8 @@ let mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 
-let currentTime = new Date().toLocaleTimeString();
-// console.log(currentTime);
+let currentTime = new Date().toLocaleTimeString("en-US",Intl.DateTimeFormat().resolvedOptions().timeZone);
+// console.log(new DateTime());
 
 
 app.use(express.static('public'));
@@ -127,11 +127,11 @@ app.post('/display/:id',(req,res)=>{
             optionTitle:'bachpnkidost',
             flag:req.body.bachpnkidost  || '0'
         },{
-            label:"My Love",
+            label:"Supportive Friend",
             optionTitle:'mylove',
             flag:req.body.mylove  || '0'
         },{
-            label:"Crush",
+            label:"Lovely Friend",
             optionTitle:'crush',
             flag:req.body.crush  || '0'
         }]
@@ -143,7 +143,7 @@ app.post('/display/:id',(req,res)=>{
         {
             name:req.body.visiterName,
             submitedOpt:filtered_records,
-            created_on: new Date().toLocaleDateString() + ' at ' + currentTime
+            created_on: new Date().toLocaleDateString()
         }
     ];
     Collection.findByIdAndUpdate(get_id,{$push : { viewsSubmited:new_record}},(err,data)=>{
@@ -200,7 +200,7 @@ app.post('/',(req,res)=>{
                 }]
             });
             postData.save((err,records)=>{
-                console.log('Data Inserted',records);
+                // console.log('Data Inserted',records);
                 res.render('linkGenerated',{title:"Generated Link",url:req.get('host')+'/display/'+records['_id']});
             });
         }else{
