@@ -1,13 +1,14 @@
 let express = require('express') , hbs = require('hbs'), path = require('path');
 let app = express();
 var address = require('address');
+var url = require('url');
 var os = require('os');
 let mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 
 let currentTime = new Date().toLocaleTimeString("en-US",Intl.DateTimeFormat().resolvedOptions().timeZone);
-// console.log(new DateTime());
+
 
 
 app.use(express.static('public'));
@@ -200,8 +201,7 @@ app.post('/',(req,res)=>{
                 }]
             });
             postData.save((err,records)=>{
-                // console.log('Data Inserted',records);
-                res.render('linkGenerated',{title:"Generated Link",url:req.get('host')+'/display/'+records['_id']});
+                res.render('linkGenerated',{title:"Generated Link",url:req.protocol+'://'+req.get('host')+'/display/'+records['_id']});
             });
         }else{
             res.send("Username Already Exists");
