@@ -78,8 +78,8 @@ app.get('/display/:id',(req,res)=>{
     let db_id = req.params.id;
     let isValid = mongoose.Types.ObjectId.isValid(db_id);
     if(isValid){
-        Collection.findById(db_id,{username:true,options:true},(err,record)=>{
-            console.log(db_id.match("/^[0-9a-fA-f]{24}$"));
+        Collection.findById(db_id,{name:true,options:true},(err,record)=>{
+            // console.log(db_id.match("/^[0-9a-fA-f]{24}$"));
             if(err){
                 res.render('display',{err});
             }
@@ -88,7 +88,7 @@ app.get('/display/:id',(req,res)=>{
                     return item.flag == 1;
                 })
                 // console.log(selectedData);
-                res.render('display',{data:selectedData,username:record.username,title:"Frienship Bond"});
+                res.render('display',{data:selectedData,username:record.name,title:"Frienship Bond"});
             }else{
                 res.render('index');
             }
