@@ -6,11 +6,7 @@ var os = require('os');
 let mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
 require('dotenv').config();
-
 let currentTime = new Date().toLocaleTimeString("en-US",Intl.DateTimeFormat().resolvedOptions().timeZone);
-
-
-
 app.use(express.static('public'));
 // Connect To DB
 mongoose.connect('mongodb+srv://pranay97:'+process.env.PASS+'@cluster0.xwfv9.mongodb.net/funApp?retryWrites=true&w=majority')
