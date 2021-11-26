@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 
 let currentTime = new Date().toLocaleTimeString();
-console.log(currentTime);
+// console.log(currentTime);
 
 
 app.use(express.static('public'));
