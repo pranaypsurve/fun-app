@@ -91,7 +91,7 @@ app.get('/display/:id',(req,res)=>{
                     return item.flag == 1;
                 })
                 // console.log(selectedData);
-                res.render('display',{data:selectedData,username:record.username,title:"Home"});
+                res.render('display',{data:selectedData,username:record.username,title:"Frienship Bond"});
             }else{
                 res.render('index');
             }
