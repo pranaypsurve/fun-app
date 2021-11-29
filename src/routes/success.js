@@ -3,7 +3,12 @@ let app = express();
 let router = express.Router();
 
 router.get('/',(req,res)=>{
-    res.render('success',{title:"Success"});
+    if(req.get('Referer')){
+        res.render('success',{title:"Success"});
+    }else{
+        res.render('index',{title:"Home"});
+    }
+    
 });
 
 module.exports = router;
