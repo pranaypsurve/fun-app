@@ -1,8 +1,8 @@
 let express = require('express') , hbs = require('hbs'), path = require('path');
-let home = require('./routes/home'); 
-let view_all = require('./routes/view_all'); 
-let success = require('./routes/success');
-let display = require('./routes/display');
+let home = require('./src/routes/home'); 
+let view_all = require('./src/routes/view_all'); 
+let success = require('./src/routes/success');
+let display = require('./src/routes/display');
 let app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
